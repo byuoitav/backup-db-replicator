@@ -1,0 +1,34 @@
+# Backup Couch Database Replicator
+Service for replicating a source couch database to a target couch database on a set time interval. Couch does not allow for replication on set time intervals.  Replication happens either continuous or ad hoc.  
+
+This utility is designed around replicating a server based on a set time interval.  This will allow for backups of the current production server to a backup server. 
+
+Service requires a json configuration document.
+Example:
+```
+{
+    "source": {
+        "address": "http://localhost:42069",
+        "username": "username",
+        "password": "password"
+    },
+    "target": {
+        "address": "http://localhost:42068",
+        "username": "username",
+        "password": "password"
+    },
+    "jobs": [
+        {
+            "database": "devices",
+            "continuous": false,
+            "id_selector": "ABC-123"
+        },
+        {
+            "database": "rooms",
+            "continuous": false,
+            "id_selector": ""
+        }
+    ],
+    "time_interval": 120 //in minutes
+}
+```
